@@ -55,7 +55,7 @@ class GetCustomerProfileImpl(CustomerProfileRequester):
 
     def get(self, request):
         registry = di.inject('CustomerProfileRegistry')
-        profile = registry.get(request.id)
+        profile = registry.get(CustomerRegistryRequest(id=42))
         return CustomerProfileResponse(first_name=profile.first_name,
                                        last_name=profile.last_name,
                                        age=profile.age)
