@@ -21,7 +21,7 @@ class CustomerProfileResponse:
 
 
 @dataclass
-class CustomerRegistryProfile:
+class CustomerRegistryResponse:
     """Data format of the registry response."""
     first_name: str
     last_name: str
@@ -33,7 +33,7 @@ class CustomerProfileRegistry(ABC):
 
     @abstractmethod
     def get_customer_profile(self, id):
-        """Get a profile by id. Must return CustomerRegistryProfile"""
+        """Get a profile by id. Must return CustomerRegistryResponse"""
 
 
 class GetCustomerProfile(ABC):
