@@ -32,7 +32,7 @@ class CustomerProfileRegistry(ABC):
     """This is the use case's interface to the db."""
 
     @abstractmethod
-    def get_customer_profile(self, id):
+    def get_customer_profile(self, request):
         """Get a profile by id. Must return CustomerRegistryResponse"""
 
 
