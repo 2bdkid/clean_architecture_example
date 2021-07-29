@@ -28,28 +28,34 @@ class CustomerRegistryResponse:
     age: int
 
 
+@dataclass
+class CustomerRegistryRequest:
+    """Request for profile."""
+    id: int
+
+
 class CustomerProfileRegistry(ABC):
     """This is the use case's interface to the db."""
 
     @abstractmethod
-    def get_customer_profile(self, request):
+    def get(self, request):
         """Get a profile by id. Must return CustomerRegistryResponse"""
 
 
-class GetCustomerProfile(ABC):
-    """Use case: Get a customer's profile by id."""
+class CustomerProfileRequester(ABC):
+    """Input boundary of use case."""
 
     @abstractmethod
-    def get_customer_profile(self, id):
+    def get(self, request):
         """Get profile by id."""
 
 
-class GetCustomerProfileImpl(GetCustomerProfile):
+class GetCustomerProfileImpl(CustomerProfileRequester):
     """Use case implementation."""
 
-    def get_customer_profile(self, request):
+    def get(self, request):
         registry = di.inject('CustomerProfileRegistry')
-        profile = registry.get_customer_profile(request.id)
+        profile = registry.get(request.id)
         return CustomerProfileResponse(first_name=profile.first_name,
                                        last_name=profile.last_name,
                                        age=profile.age)

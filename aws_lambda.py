@@ -9,7 +9,7 @@ def lambda_handler(event, context):
     request = CustomerProfileRequest(id=event['id'])
     # Lambda has no way to support this DI afaik
     profile_getter = di.inject('GetCustomerProfile')
-    response = profile_getter.get_customer_profile(request)
+    response = profile_getter.get(request)
 
     return {
         'profile': {
