@@ -53,9 +53,11 @@ class CustomerProfileRequester(ABC):
 class GetCustomerProfileImpl(CustomerProfileRequester):
     """Use case implementation."""
 
+    def __init__(self, registry):
+        self.registry = registry
+
     def get(self, request):
-        registry = di.inject('CustomerProfileRegistry')
-        profile = registry.get(CustomerRegistryRequest(id=42))
+        profile = self.registry.get(CustomerRegistryRequest(id=42))
         return CustomerProfileResponse(first_name=profile.first_name,
                                        last_name=profile.last_name,
                                        age=profile.age)
